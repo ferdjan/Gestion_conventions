@@ -1014,4 +1014,12 @@ table.kv tr:last-child th, table.kv tr:last-child td { border-bottom: 0; }
   .layout { display: block; }
   .content { max-width: none; padding: 0; }
   .card, .panel, .budget-card { box-shadow: none; break-inside: avoid; }
+  /* Les zones à défilement interne seraient rognées à la hauteur de leur
+     max-height : on les déplie intégralement avant impression. */
+  .cart-list, .results {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  /* La barre collante doit rester dans le flux du document imprimé. */
+  .action-bar { position: static !important; box-shadow: none; }
 }
