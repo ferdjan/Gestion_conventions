@@ -152,14 +152,22 @@ Vérification : `git status --ignored`.
 
 | Commit | Objet |
 | --- | --- |
-| `3edec54` | initialisation du dépôt + refonte de l'étape 2 (Variante A) |
-| `0f8f09a` | défilement interne du panier + surbrillance de la ligne ajoutée |
-| `d8170da` | ajout de `AGENT.md` (consignes de travail) |
-| `f9c80f3` | **fix** : barre d'étapes de 150 px par étape à ≤900 px |
-| `50e1ebe` | **fix** : le panier et le catalogue étaient rognés à l'impression |
-| `befdfe6` | **refactor** : remplacement des 2 derniers styles inline (étapes 1 et 3) |
+| `cc549c8` | initialisation du dépôt + refonte de l'étape 2 (Variante A) |
+| `8157616` | défilement interne du panier + surbrillance de la ligne ajoutée |
+| `c44a515` | ajout de `AGENT.md` (consignes de travail) |
+| `7a0b1ed` | **fix** : barre d'étapes de 150 px par étape à ≤900 px |
+| `71cf5d1` | **fix** : le panier et le catalogue étaient rognés à l'impression |
+| `cdb232c` | **refactor** : remplacement des 2 derniers styles inline (étapes 1 et 3) |
+| `77772ce` | **docs** : mise à jour de ce tableau |
+| `5766ea5` | **docs** : défilement du panier, correctifs et versionnement |
 
-> Ce tableau est indicatif. La source de vérité reste `git log --oneline`.
+> ⚠️ **Ce tableau est figé à un instant donné** et devient obsolète dès que
+> l'historique est réécrit (`git rebase`, `git commit --amend`,
+> `reset --hard`). **La source de vérité est toujours** :
+> ```bash
+> git --no-pager log --oneline
+> ```
+> Ne recopiez pas ces empreintes ailleurs sans les revérifier.
 
 Dépôt **local uniquement** (pas de remote). Pour pousser un jour :
 ```bash
