@@ -55,7 +55,7 @@ Convention, articles, puis vérification avant enregistrement (PDF + Excel + his
         <h2>{{ icon("briefcase", "icon icon-sm") }} 1 — Choisir la convention</h2>
         {% if mode == "edit" %}<span class="badge">Convention figée</span>{% endif %}
       </div>
-      <div class="panel-body" style="display: flex; flex-direction: column; gap: 14px">
+      <div class="panel-body stack">
         {% if mode == "edit" %}
         <div class="notice info" style="margin:0">En modification, la convention ne peut pas
           changer : <strong>{{ selected }}</strong>
@@ -196,7 +196,7 @@ Convention, articles, puis vérification avant enregistrement (PDF + Excel + his
         <h2>{{ icon("check", "icon icon-sm") }} 3 — Vérifier et enregistrer</h2>
         <span class="badge" id="recap-number">—</span>
       </div>
-      <div class="panel-body" id="recap-body" style="display: flex; flex-direction: column; gap: 14px"></div>
+      <div class="panel-body stack" id="recap-body"></div>
       <div class="panel-foot wizard-nav">
         <button type="button" class="btn" id="back-to-2">{{ icon("back", "icon icon-sm") }} Modifier le panier</button>
         <span class="spacer"></span>
