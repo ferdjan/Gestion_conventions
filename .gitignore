@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ------------------------------------------------------------ environnement
+.venv/
+venv/
+env/
+
+# ------------------------------------- données applicatives / secrets / runtime
+web_app.db
+*.sqlite3
+.session.key
+uploads/
+documents_pdf/
+smoke_*.txt
+
+# ------------------------------------------- dépendances hors-ligne (38 Mo)
+wheels/
+
+# ------------------------------------------------------------ éditeur / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini

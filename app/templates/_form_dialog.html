@@ -1,0 +1,42 @@
+{#- Dialogue commun « Formulaire Word » : fiche commande et historique.
+
+    Les boutons sont des liens directs (fonctionnement sans JavaScript) ;
+    form_dialog.js intercepte le clic pour ouvrir ce dialogue et permettre la
+    saisie des champs libres avant le téléchargement. -#}
+{% from "_icons.html" import icon %}
+<dialog id="form-dialog" aria-labelledby="form-dialog-title">
+  <form method="get" action="" id="form-dialog-form">
+    <div class="dialog-head">
+      <h3 id="form-dialog-title">Télécharger un formulaire</h3>
+      <button type="button" class="icon-btn" data-close aria-label="Fermer">{{ icon("x") }}</button>
+    </div>
+    <div class="dialog-body">
+      <div class="field">
+        <label>Formulaire</label>
+        <div id="form-dialog-label" style="font-weight:600">—</div>
+      </div>
+      <div class="field" data-for-kind="2 3">
+        <label for="form-service">Service demandeur</label>
+        <input type="text" id="form-service" name="service" autocomplete="off"
+               value="{{ FORM_DEFAULTS.service }}">
+      </div>
+      <div class="field" data-for-kind="3">
+        <label for="form-reference">Référence de la demande de matières</label>
+        <input type="text" id="form-reference" name="reference" autocomplete="off"
+               value="{{ FORM_DEFAULTS.reference }}">
+      </div>
+      <div class="field" data-for-kind="4">
+        <label for="form-convention">Convention commerciale du centre N°</label>
+        <input type="text" id="form-convention" name="convention" autocomplete="off"
+               value="{{ FORM_DEFAULTS.convention }}">
+      </div>
+      <p class="hint" style="margin:0">
+        Les zones d'observation, d'avis et de signature restent à compléter dans Word.
+      </p>
+    </div>
+    <div class="dialog-foot">
+      <button type="button" class="btn" data-close>Annuler</button>
+      <button type="submit" class="btn btn-primary">{{ icon("download", "icon icon-sm") }} Télécharger</button>
+    </div>
+  </form>
+</dialog>

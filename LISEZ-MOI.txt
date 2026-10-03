@@ -1,0 +1,39 @@
+=====================================================================
+ GESTION ARTICLES - edition web
+ Programme local, hors-ligne : aucune donnee ne quitte votre poste.
+=====================================================================
+
+PREALABLE
+  Installer Python 3.10 a 3.14 : https://www.python.org/downloads/
+  IMPORTANT : cocher la case "Add Python to PATH" pendant l'installation.
+  Rien d'autre n'est besoin : les paquets necessaires sont dans le
+  dossier wheels\ et s'installent sans internet.
+
+INSTALLATION (une seule fois)
+  1. Decompresser l'archive SUR LE DISQUE DUR.
+     Exemple : C:\GestionArticles\  (ni sur une cle USB, ni dans un
+     dossier ou Windows bloque les scripts).
+  2. Double-cliquer sur run.bat.
+  3. Le navigateur s'ouvre sur http://127.0.0.1:8765 : c'est le programme.
+
+UTILISATION
+  Chaque poste possede sa propre base de donnees (web_app.db) : vos
+  commandes ne sont pas partagees avec les collegues.
+  Pour creer la base au premier lancement, le classeur source_listes.xlsx
+  est fourni dans l'archive (inutile de le choisir).
+  Arret : fermer la fenetre noire ou Ctrl+C.  Redemarrage : run.bat.
+
+DEPANNAGE
+  "Python introuvable"      -> installer Python avec "Add to PATH", relancer run.bat.
+  Installation impossible   -> se connecter UNE FOIS a internet puis relancer
+                               run.bat (les paquets sont ensuite en cache).
+  Port 8765 deja utilise    -> l'application passe automatiquement au port
+                               suivant ; si la page ne s'affiche pas, fermez
+                               l'ancienne fenetre noire et relancez run.bat.
+  Antivirus / Windows Smart -> autoriser le dossier ; c'est un programme
+  Screen                       Python local, aucun executable inconnu.
+  Repartir de zero          -> supprimer web_app.db et .session.key puis
+                               relancer run.bat.
+
+FICHIERS A NE PAS PARTAGER (donnees personnelles)
+  web_app.db, .session.key, documents_pdf\, uploads\  -> jamais dans l'archive.
