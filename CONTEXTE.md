@@ -49,6 +49,30 @@
 > attribut lu par `document.js`, aucun libellé ni assertion du test de fumée
 > n'a changé (**136/136** toujours vert ; `pyflakes`/`compileall`/`node --check`
 > propres).
+>
+> Puis **défilement du panier** : `.cart-list` passe d'une liste infinie à une
+> **zone bornée** (`max-height: min(48vh, 440px)` + `overflow-y: auto`), comme le
+> catalogue (`.results`, 335 px) — avant, avec beaucoup d'articles la colonne
+> s'allongeait indéfiniment et la ligne fraîchement ajoutée apparaissait **derrière
+> la barre collante**, donc invisible. `flashLine(index)` (appelée **uniquement**
+> depuis `addArticle()`, jamais depuis `renderCart()`, pour ne pas provoquer de
+> déplacement parasite lors d'un retrait/vidage/erreur) amène la ligne avec
+> `scrollIntoView({block:"nearest"})` et l'illumine 1,2 s (`.cart-line.is-new` +
+> `@keyframes cart-flash`). `.cart-line { scroll-margin-bottom: 96px }` compense la
+> barre collante.
+>
+> **Correctifs ultérieurs** : `.steps li { flex: 0 0 auto }` à ≤900 px (en
+> `flex-direction: column`, `flex: 1 1 150px` s'appliquait à la **hauteur** →
+> barre d'étapes de ~460 px) ; `@media print` déplie désormais `.cart-list` et
+> `.results` (`max-height: none`) et remet `.action-bar` en `static` (sinon le
+> panier était rogné au PDF) ; les 2 derniers styles inline des étapes 1 et 3 sont
+> remplacés par `.stack`. Toutes ces classes sont **confinées à
+> `document_form.html`** ; `.budget-rows` (partagé avec `dashboard.html` et
+> `convention_detail.html`) est inchangé.
+>
+> **Le dépôt est versionné** (`git init`, branche `main`, 7 commits, `.gitignore`
+> excluant `web_app.db`, `.session.key`, `uploads/`, `documents_pdf/`, `wheels/`).
+> Voir `AGENT.md` : **un commit par grand changement**.
 
 ---
 
@@ -185,6 +209,11 @@ node --check app\static\js\*.js             :: 9 fichiers OK
 python tests\smoke_test.py                 :: 136/136
 python serve.py                            :: http://127.0.0.1:8765 (sinon port suivant)
 
+:: versionnement (voir AGENT.md : un commit par grand changement)
+git status --short                         :: arbre propre avant/après
+git --no-pager log --oneline -7            :: historique
+git add -A && git commit -m "feat(portee): description impérative"
+
 :: distribution hors-ligne
 python -m pip download -r requirements.txt -d wheels --only-binary=:all: ^
       --platform win_amd64 --implementation cp --python-version 3.11   (x 3.10/3.12/3.13/3.14)
@@ -215,7 +244,11 @@ champs saisis et défauts `app_meta`, libellés de boutons, normalisation à
   → le rendu, les dialogues `<dialog>` (dont celui des formulaires), la grille de
   thèmes, le pré-remplissage de `conventions.js` (édition d'exercice) et la
   navigation clavier du catalogue **n'ont pas été testés à l'écran**. À vérifier
-  en priorité en cas de reprise.
+  en priorité en cas de reprise. Porte aussi, depuis la refonte : le
+  **défilement interne du panier** (ajouter 15–20 articles → ascenseur + ligne
+  amenée et surlignée), la **barre d'étapes à ≤900 px** (doit rester ~45 px par
+  pastille, non ~150 px), la **barre collante** de l'étape 2, et un **`Ctrl+P`**
+  de l'étape 2 (panier intégral, barre d'actions dans le flux).
 - **Non validé dans Word** : le remplissage des `.docx` est vérifié
   structurellement (zip valide, XML bien formé, espaces de nom et `mc:Ignorable`
   préservés, 10 lignes normalisées, pagination 2 pages + saut de page, lignes
