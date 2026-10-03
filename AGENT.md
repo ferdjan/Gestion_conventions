@@ -154,7 +154,12 @@ Vérification : `git status --ignored`.
 | --- | --- |
 | `3edec54` | initialisation du dépôt + refonte de l'étape 2 (Variante A) |
 | `0f8f09a` | défilement interne du panier + surbrillance de la ligne ajoutée |
-| *ce commit* | ajout de `AGENT.md` (consignes de travail) |
+| `d8170da` | ajout de `AGENT.md` (consignes de travail) |
+| `f9c80f3` | **fix** : barre d'étapes de 150 px par étape à ≤900 px |
+| `50e1ebe` | **fix** : le panier et le catalogue étaient rognés à l'impression |
+| `befdfe6` | **refactor** : remplacement des 2 derniers styles inline (étapes 1 et 3) |
+
+> Ce tableau est indicatif. La source de vérité reste `git log --oneline`.
 
 Dépôt **local uniquement** (pas de remote). Pour pousser un jour :
 ```bash
