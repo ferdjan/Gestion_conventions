@@ -29,9 +29,9 @@
         {% for key, theme in THEMES.items() %}
         <button type="button" class="theme-chip" data-theme-set="{{ key }}"
                 aria-label="Appliquer le thème {{ theme.label }}">
-          <span class="swatch" style="background: {{ theme.colors.primary }}"></span>
-          <span class="swatch" style="background: {{ theme.colors.accent }}"></span>
-          <span class="swatch" style="background: {{ theme.colors.bg }}"></span>
+          <span class="swatch" data-swatch="primary" data-color="{{ theme.colors.primary }}"></span>
+          <span class="swatch" data-swatch="accent" data-color="{{ theme.colors.accent }}"></span>
+          <span class="swatch" data-swatch="bg" data-color="{{ theme.colors.bg }}"></span>
           <span class="theme-name">{{ theme.label }}</span>
         </button>
         {% endfor %}
@@ -113,6 +113,7 @@
   <div class="panel-body">
     <p class="hint" style="margin:0">
       {{ APP_NAME }} — {{ APP_SUBTITLE }}, version {{ VERSION }}.
+      Développée par {{ APP_AUTHOR }}.
       Application monoposte, sans compte ni mot de passe : l'accès est limité à cette machine
       et aucune donnée n'est transmise à l'extérieur. La sauvegarde téléchargée est une copie
       SQLite cohérente du fichier de base.

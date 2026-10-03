@@ -7,6 +7,7 @@ from pathlib import Path
 APP_NAME = "Gestion Articles"
 APP_SUBTITLE = "Conventions & commandes — édition web"
 VERSION = "2.0-web"
+APP_AUTHOR = "H.Ferdjani"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "web_app.db"

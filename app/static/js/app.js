@@ -51,6 +51,18 @@
     syncTheme();
   }
 
+  /* ------------------------------------------------- jauges de plafond --- */
+  /* Largeur des jauges via data-rate (pas de style inline Jinja dans le HTML,
+     pour ne pas déclencher le validateur CSS de VS Code en édition). */
+  document.querySelectorAll(".gauge[data-rate] > span").forEach(function (bar) {
+    var gauge = bar.parentElement;
+    var rate = parseFloat(gauge.getAttribute("data-rate"));
+    if (!isFinite(rate)) rate = 0;
+    if (rate < 0) rate = 0;
+    if (rate > 100) rate = 100;
+    bar.style.width = rate + "%";
+  });
+
   /* ------------------------------------------------------------- flash */
   document.addEventListener("click", function (event) {
     var dismiss = event.target.closest("[data-dismiss]");

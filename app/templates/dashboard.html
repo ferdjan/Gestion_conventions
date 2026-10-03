@@ -54,9 +54,9 @@
     </div>
 
     {% set rate = card.summary.rate or 0 %}
-    <div class="gauge" data-state="{{ card.summary.state }}" role="img"
+    <div class="gauge" data-state="{{ card.summary.state }}" data-rate="{{ [ (rate * 100) | round(1), 100 ] | min }}" role="img"
          aria-label="{{ card.name }} : {{ {"ok": "sain", "warn": "alerte 80 %", "critical": "critique 90 %", "over": "plafond atteint", "none": "sans plafond"}[card.summary.state] }}, {{ (rate * 100) | round(1) }} % consommés">
-      <span style="width: {{ [ (rate * 100) | round(1), 100 ] | min }}%"></span>
+      <span></span>
       <div class="gauge-marks"><i style="left: 80%"></i><i style="left: 90%"></i></div>
     </div>
 

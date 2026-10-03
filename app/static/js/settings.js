@@ -4,6 +4,13 @@
   var grid = document.getElementById("theme-grid");
   if (!grid || !window.GATheme) return;
 
+  /* Applique les couleurs des pastilles (data-color) sans style inline Jinja
+     dans le HTML — évite les faux positifs du validateur CSS de VS Code. */
+  grid.querySelectorAll("[data-color]").forEach(function (node) {
+    var color = node.getAttribute("data-color");
+    if (color) node.style.backgroundColor = color;
+  });
+
   function mark() {
     var current = window.GATheme.get();
     grid.querySelectorAll("[data-theme-set]").forEach(function (btn) {
