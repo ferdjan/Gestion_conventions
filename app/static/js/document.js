@@ -274,11 +274,13 @@
 
   function addArticle(article, quantity) {
     var existing = null;
+    var targetIndex = null;
     cart.forEach(function (item) {
       if (item.article_id === article.id) existing = item;
     });
     if (existing) {
       existing.quantity = Math.round((existing.quantity + quantity) * 10000) / 10000;
+      targetIndex = cart.indexOf(existing);
     } else {
       cart.push({
         item_id: null,
@@ -290,10 +292,22 @@
         quantity: quantity,
         frozen: false
       });
+      targetIndex = cart.length - 1;
     }
     if (qtyInput) qtyInput.value = "1";
     renderCart();
+    flashLine(targetIndex);
     refreshBudget();
+  }
+
+  /* Amène la ligne ajoutée dans la zone visible et la surligne brièvement. */
+  function flashLine(index) {
+    if (!cartBody || index == null || index < 0) return;
+    var line = cartBody.children[index];
+    if (!line) return;
+    if (line.scrollIntoView) line.scrollIntoView({ block: "nearest" });
+    line.classList.add("is-new");
+    setTimeout(function () { line.classList.remove("is-new"); }, 1300);
   }
 
   /* ------------------------------------------------------------- panier */

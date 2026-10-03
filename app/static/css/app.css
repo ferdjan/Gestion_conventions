@@ -522,7 +522,18 @@ table.table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .results-state.results-error { color: var(--c-danger); }
 
 /* --------------------------------------------------- panier (liste de lignes) */
-.cart-list { display: flex; flex-direction: column; gap: 8px; }
+/* Hauteur bornée + ascenseur interne : comme le catalogue, le panier reste
+   dans la zone visible au lieu d'allonger indéfiniment la page. */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: min(48vh, 440px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 1px 4px 1px 1px;
+}
 .cart-empty {
   padding: 26px 18px;
   text-align: center;
@@ -539,8 +550,24 @@ table.table { width: 100%; border-collapse: collapse; font-size: 14px; }
   display: flex;
   flex-direction: column;
   gap: 7px;
+  /* laisse passer la barre d'actions collante au scrollIntoView */
+  scroll-margin-bottom: 96px;
 }
 .cart-line:hover { border-color: var(--c-border-strong); }
+/* Surbrillance brève de la ligne qui vient d'être ajoutée. */
+.cart-line.is-new {
+  animation: cart-flash 1.2s ease-out 1;
+}
+@keyframes cart-flash {
+  0% {
+    background: color-mix(in srgb, var(--c-accent) 24%, var(--c-surface));
+    border-color: color-mix(in srgb, var(--c-accent) 55%, var(--c-border));
+  }
+  100% {
+    background: var(--c-surface);
+    border-color: var(--c-border);
+  }
+}
 .cart-line-head { display: flex; align-items: center; gap: 10px; }
 .cart-code { flex: 0 0 auto; color: var(--c-muted); }
 .cart-desig {
