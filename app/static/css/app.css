@@ -978,6 +978,10 @@ table.kv tr:last-child th, table.kv tr:last-child td { border-bottom: 0; }
   .result { grid-template-columns: 58px minmax(0, 1fr) 95px 34px; }
   .result .unit { display: none; }
   .steps { flex-direction: column; }
+  /* En colonne l'axe principal est vertical : flex: 1 1 150px s'appliquerait
+     à la HAUTEUR et ferait des étapes des blocs de 150 px. On repasse en
+     hauteur naturelle (la largeur reste étirée par align-items: stretch). */
+  .steps li { flex: 0 0 auto; }
   .cart-qty input { width: 100%; min-width: 64px; }
 }
 
