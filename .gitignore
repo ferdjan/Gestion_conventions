@@ -23,6 +23,11 @@ smoke_*.txt
 # ------------------------------------------- dépendances hors-ligne (38 Mo)
 wheels/
 
+# ------------------------------------------- sorties PyInstaller (fabriquer_exe.ps1)
+build/
+dist/
+*.spec
+
 # ------------------------------------------------------------ éditeur / OS
 .vscode/
 .idea/

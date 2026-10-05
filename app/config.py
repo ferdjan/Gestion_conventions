@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import getpass
+import sys
 from pathlib import Path
 
 APP_NAME = "Gestion Articles"
@@ -9,17 +10,37 @@ APP_SUBTITLE = "Conventions & commandes — édition web"
 VERSION = "2.0-web"
 APP_AUTHOR = "H.Ferdjani"
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# ---------------------------------------------------------------- mode figé
+# Deux racines distinctes quand l'application est empaquetée en .exe
+# (PyInstaller, cf. fabriquer_exe.ps1) :
+#   RESOURCE_DIR — lecture seule : ressources embarquées dans l'archive
+#                  (templates, static, Model/, source_listes.xlsx) ;
+#   BASE_DIR     — écriture     : à côté du .exe (web_app.db, .session.key,
+#                  documents_pdf/, uploads/) — jamais dans le dossier
+#                  temporaire _MEIxxxx qui disparaît à la fermeture.
+# Hors .exe, les deux restent identiques au dossier du projet (comportement
+# historique inchangé).
+FROZEN = bool(getattr(sys, "frozen", False)) and hasattr(sys, "_MEIPASS")
+
+if FROZEN:
+    RESOURCE_DIR = Path(getattr(sys, "_MEIPASS"))
+    BASE_DIR = Path(sys.executable).resolve().parent
+else:
+    RESOURCE_DIR = Path(__file__).resolve().parent.parent
+    BASE_DIR = RESOURCE_DIR
+
 DB_PATH = BASE_DIR / "web_app.db"
 EXPORT_DIR = BASE_DIR / "documents_pdf" / "web"
 SECRET_FILE = BASE_DIR / ".session.key"
 UPLOAD_DIR = BASE_DIR / "uploads"
 # Modèles Word des formulaires administratifs (lecture seule, jamais modifiés).
-MODEL_DIR = BASE_DIR / "Model"
+MODEL_DIR = RESOURCE_DIR / "Model"
 
-# Classeur source : à côté de l'app web, sinon dans le dépôt parent (racine du
-# projet bureau) — permet de réutiliser source_listes.xlsx sans le dupliquer.
+# Classeur source : ressources embarquées, à côté de l'app web, sinon dans le
+# dépôt parent (racine du projet bureau) — réutilise source_listes.xlsx sans le
+# dupliquer.
 SEED_CANDIDATES = (
+    RESOURCE_DIR / "source_listes.xlsx",
     BASE_DIR / "source_listes.xlsx",
     BASE_DIR.parent / "source_listes.xlsx",
 )

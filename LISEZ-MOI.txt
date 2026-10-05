@@ -3,6 +3,47 @@
  Programme local, hors-ligne : aucune donnee ne quitte votre poste.
 =====================================================================
 
+-----------------------------------------------------------------------
+ METHODE 1 (LA PLUS SIMPLE) : GestionArticles.exe
+-----------------------------------------------------------------------
+Vous avez recu un seul fichier : GestionArticles.exe
+
+  PREALABLE : aucun (pas de Python, rien a installer).
+
+  INSTALLATION (une seule fois)
+    1. Creer un dossier sur le disque dur, ex. : C:\GestionArticles\
+       (sur le disque dur, ni sur une cle USB, ni dans "Program Files").
+    2. Copier GestionArticles.exe dedans.
+    3. Double-cliquer sur GestionArticles.exe.
+    4. Le navigateur s'ouvre sur http://127.0.0.1:8765 : c'est le programme.
+
+  PREMIER LANCEMENT - WINDOWS PEUT AFFICHER :
+    "Windows a protege votre PC"  ->  cliquer sur
+    "Informations complementaires" puis "Exe quand meme".
+    (C'est un ecran d'avertissement automatique : le programme n'est pas
+    "signe" par Microsoft, il est pourtant sans danger.)
+
+  UTILISATION
+    Vos donnees sont creees AUTOUR du .exe : web_app.db, documents_pdf\,
+    uploads\, .session.key. Ne supprimez rien de tout cela.
+    Chaque poste possede sa propre base : vos commandes ne sont pas
+    partagees avec les collegues.
+    Arret : fermer la fenetre noire.  Redemarrage : double-cliquer sur le .exe.
+
+  DEPANNAGE
+    "Ce dossier est en lecture seule"
+        -> deplacer le .exe dans un dossier personnel (ex. Documents).
+    L'ecran ne s'affiche pas / page blanche
+        -> fermer la fenetre noire, relancer le .exe.
+    Antivirus / Windows SmartScreen
+        -> autoriser le dossier ; c'est un programme local, aucun acces internet.
+    Repartir de zero
+        -> SUPPRIMER web_app.db et .session.key a cote du .exe
+           puis relancer (base vide, reimportee au demarrage).
+
+-----------------------------------------------------------------------
+ METHODE 2 : ARCHIVE ZIP (GestionArticles-v2.0.zip) - pour utilisateurs Python
+-----------------------------------------------------------------------
 PREALABLE
   Installer Python 3.10 a 3.14 : https://www.python.org/downloads/
   IMPORTANT : cocher la case "Add Python to PATH" pendant l'installation.
@@ -37,3 +78,4 @@ DEPANNAGE
 
 FICHIERS A NE PAS PARTAGER (donnees personnelles)
   web_app.db, .session.key, documents_pdf\, uploads\  -> jamais dans l'archive.
+
